@@ -19,17 +19,20 @@ class Dashboard extends Component {
         })
     }
 
+    waterPlant() {
+        console.log(document);
+        console.log("Watering!");
+    }
+
     render() {
         return(
             <div>
+
                 <h1>Dashboard</h1>
                 {JSON.stringify(this.state.data)}
-                <ul className="collapsible">
-                    <li>
-                        <div className="collapsible-header">Test</div>
-                        <div className="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-                    </li>
-                </ul>
+                <div className="btn-floating btn-large pulse blue" onClick={this.waterPlant}>
+                    <i className="fa fa-tint"/>
+                </div>
             </div>
         )
     }

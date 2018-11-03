@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom"
+import {BrowserRouter as Router, Route, Redirect} from "react-router-dom"
 import { connect } from "react-redux";
 import { Login } from './pages/Login';
 import { firebaseAuth } from './config/firebase_config';
-import { firebaseuiConfig } from './config/firebaseui_config';
 import { actions } from './actions';
 import { constants, loginStates } from './constants';
 import Dashboard from './pages/Dashboard';
