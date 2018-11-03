@@ -1,28 +1,66 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
+import {BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom"
+import { connect } from "react-redux";
+import { Login } from './pages/Login';
+import { firebaseAuth } from './config/firebase_config';
+import { firebaseuiConfig } from './config/firebaseui_config';
+import { actions } from './actions';
+import { constants, loginStates } from './constants';
+import Dashboard from './pages/Dashboard';
+import LoadingPage from './pages/LoadingPage';
+import Navbar from './components/Nav/Navbar';
+
 import './App.css';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+
+    componentWillMount() {
+        firebaseAuth.onAuthStateChanged((user) => {
+            localStorage.setItem(constants.USER, JSON.stringify(user))
+            let type = user ? actions.LOGGED_IN : actions.LOGGED_OUT
+            this.props.dispatch({type, user})
+        });
+    }
+
+    render() {
+        return (
+            <Router>
+                <div>
+                    <Navbar loggedIn={this.props.auth.loggedIn}/>
+                    <Route
+                        path="/dashboard"
+                        render={props =>
+                        this.props.auth.loggedIn === loginStates.loggedIn ? (
+                            <Dashboard/>
+                        ) : (
+                            <Redirect
+                            to={{
+                                pathname: "/login",
+                                state: { from: props.location }
+                            }}
+                            />
+                        )
+                        }
+                    />
+                    { (this.props.auth.loggedIn === loginStates.loggingIn) && 
+                        <LoadingPage/>
+                    }
+                    <Route path='/login' component={Login}/>
+                    {this.props.auth.loggedIn}
+                </div>
+            </Router>
+        );
+    }
 }
 
-export default App;
+function mapStateToProps(state) {
+    if (!state.setAuth) {
+        return {auth: {loggedIn: true} }
+    }
+    return {
+        auth: state.setAuth
+    }
+}
+
+const connectedApp = connect(mapStateToProps)(App)
+export { connectedApp as App };
