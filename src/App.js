@@ -7,6 +7,7 @@ import { actions } from './actions';
 import { constants, loginStates } from './constants';
 import Dashboard from './pages/Dashboard';
 import LoadingPage from './pages/LoadingPage';
+import LandingPage from './pages/LandingPage';
 import Navbar from './components/Nav/Navbar';
 
 import './App.css';
@@ -45,6 +46,7 @@ class App extends Component {
                         <LoadingPage/>
                     }
                     <Route path='/login' component={Login}/>
+                    <Route exact path='/' component={LandingPage}/>
                 </div>
             </Router>
         );

@@ -31,33 +31,47 @@ class Dashboard extends Component {
     }
 
     waterPlant() {
-        axios.post(backendConfig.url + "dapost",
+        axios.post(backendConfig.url + this.state.uid,
             {
                 command: "WaterPlant",
                 data: this.state.sliderVal
             })
     }
 
-    componentDidMount() {
-        let slider = document.getElementById("slider");
-        noUiSlider.create(slider, {
-            start: [this.state.sliderVal],
-            connect: [true, false],
-            step: 0.5,
-            orientation: 'horizontal', // 'horizontal' or 'vertical'
-            range: {
-                'min': 0,
-                'max': 20
-            }
-        });
-        slider.noUiSlider.on("update", (val) => {
-            this.setState({
-               sliderVal: parseFloat(val)
+    componentDidUpdate() {
+        try {
+            let slider = document.getElementById("slider");
+            noUiSlider.create(slider, {
+                start: [this.state.sliderVal],
+                connect: [true, false],
+                step: 0.5,
+                orientation: 'horizontal', // 'horizontal' or 'vertical'
+                range: {
+                    'min': 0,
+                    'max': 20
+                }
             });
-        });
+            slider.noUiSlider.on("update", (val) => {
+                this.setState({
+                    sliderVal: parseFloat(val)
+                });
+            });
+        } catch (e) {
+            console.error(e);
+        }
     }
 
     render() {
+        if(Object.keys(this.state.data).length === 0 && this.state.data.constructor === Object) {
+            return(
+                <div>
+                    <h3 style={{textAlign: "center"}}>
+                        Oops, you don't seem to have a device set up!
+                    </h3>
+                </div>
+            );
+        }
+
         return(
             <div className="container">
                 <h3>Dashboard</h3>
