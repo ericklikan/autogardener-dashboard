@@ -10,8 +10,6 @@ if(rawUser) {
     loggedIn = loginStates.loggedIn;
 }
 
-console.log(user, loggedIn);
-
 const setAuth = (state = {user, loggedIn}, action) => {
     switch (action.type) {
         case actions.LOGGED_IN:

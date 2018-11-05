@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import noUiSlider from 'nouislider';
+import axios from 'axios';
+import backendConfig from '../config/backendURL';
 import { firebaseDB } from '../config/firebase_config';
 import InfoCard from '../components/InfoCard';
 
@@ -17,7 +19,8 @@ class Dashboard extends Component {
             uid: props.user.uid,
             data: {},
             sliderVal: 0
-        }
+        };
+        this.waterPlant = this.waterPlant.bind(this);
     }
 
     componentWillMount() {
@@ -28,11 +31,15 @@ class Dashboard extends Component {
     }
 
     waterPlant() {
-        console.log("Watering!");
+        axios.post(backendConfig.url + "dapost",
+            {
+                command: "WaterPlant",
+                data: this.state.sliderVal
+            })
     }
 
     componentDidMount() {
-        let slider = document.getElementById("slider")
+        let slider = document.getElementById("slider");
         noUiSlider.create(slider, {
             start: [this.state.sliderVal],
             connect: [true, false],
@@ -69,6 +76,7 @@ class Dashboard extends Component {
                         <div className='range-field' id="slider"/>
                     </div>
                 </div>
+                <br/>
                 <div className='row'>
                     {[{
                             color: "red",
