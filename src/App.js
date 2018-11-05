@@ -45,7 +45,6 @@ class App extends Component {
                         <LoadingPage/>
                     }
                     <Route path='/login' component={Login}/>
-                    {this.props.auth.loggedIn}
                 </div>
             </Router>
         );

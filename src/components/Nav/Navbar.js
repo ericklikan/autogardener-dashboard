@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { constants, loginStates } from '../../constants';
-
+import { loginStates } from '../../constants';
 
 
 import SignIn from './SignIn';
 import SignOut from './SignOut';
-import Signout from './SignOut';
 
 class Navbar extends Component {
 

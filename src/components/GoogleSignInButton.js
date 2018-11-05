@@ -3,9 +3,6 @@ import { connect } from "react-redux";
 import firebaseui from 'firebaseui';
 import { firebaseAuth } from '../config/firebase_config';
 import { firebaseuiConfig } from '../config/firebaseui_config';
-import { actions } from '../actions';
-import { constants } from '../constants';
-import login from '../actions';
 
 class GoogleSignInButton extends Component {
 
