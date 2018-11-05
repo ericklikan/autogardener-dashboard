@@ -1,6 +1,7 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
-var config = {
+const config = {
     signInSuccessUrl: '/dashboard',
     signInOptions: [
         firebase.auth.GoogleAuthProvider.PROVIDER_ID

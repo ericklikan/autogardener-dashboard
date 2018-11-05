@@ -56,9 +56,7 @@ class Dashboard extends Component {
                     sliderVal: parseFloat(val)
                 });
             });
-        } catch (e) {
-            console.error(e);
-        }
+        } catch (e) {}
     }
 
     render() {
