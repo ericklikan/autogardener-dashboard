@@ -1,4 +1,4 @@
-#React Project for AutoGarden Dashboard
+# React Project for AutoGarden Dashboard
 
 For device project repo go to: https://github.com/ericklikan/autogardener-device
 
