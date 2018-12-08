@@ -5,7 +5,8 @@ const top = {
 };
 
 const page = {
-  fontSize: "1.5em"
+  fontSize: "1.5em",
+  paddingBottom: "50pt"
 };
 
 const asset = {
