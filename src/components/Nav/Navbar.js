@@ -12,7 +12,7 @@ class Navbar extends Component {
         return(
             <nav className="nav-wrapper green">
                 <div className="container">
-                    <Link to='/dashboard' className="brand-logo" >AutoPlant</Link>
+                    <Link to={this.props.loggedIn ? '/dashboard': '/'} className="brand-logo" >AutoPlant</Link>
                 </div>
                 { this.props.loggedIn === loginStates.loggedOut &&
                     <SignIn/>
